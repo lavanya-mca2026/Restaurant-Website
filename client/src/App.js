@@ -2,17 +2,30 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="container">
-      <h1>🍽️ Lavanya's Restaurant</h1>
+    <div>
 
-      <h2>Delicious Food, Happy Moments!</h2>
+      <nav className="navbar">
+        <h2 className="logo">🍽️ Lavanya's Restaurant</h2>
 
-      <p>
-        Experience the best food in town with fresh ingredients,
-        fast delivery, and unforgettable taste.
-      </p>
+        <ul className="nav-links">
+          <li>Home</li>
+          <li>About</li>
+          <li>Menu</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
 
-      <button>Explore Menu</button>
+      <div className="container">
+        <h1>Delicious Food, Happy Moments!</h1>
+
+        <p>
+          Experience the best food in town with fresh ingredients,
+          fast delivery, and unforgettable taste.
+        </p>
+
+        <button>Explore Menu</button>
+      </div>
+
     </div>
   );
 }

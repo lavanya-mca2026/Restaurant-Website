@@ -1,16 +1,44 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #d35400;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+}
+
+.logo {
+  margin: 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.nav-links li:hover {
+  color: yellow;
+}
+
 .container {
   text-align: center;
   margin-top: 80px;
-  font-family: Arial, sans-serif;
 }
 
 h1 {
   color: #d35400;
   font-size: 50px;
-}
-
-h2 {
-  color: #2c3e50;
 }
 
 p {
