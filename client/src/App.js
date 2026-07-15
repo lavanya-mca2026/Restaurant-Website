@@ -67,6 +67,19 @@ function App() {
         </p>
       </div>
 
+      {/* Contact Section */}
+      <div className="contact">
+        <h2>Contact Us</h2>
+
+        <p>📧 Email: lavanyarestaurant@gmail.com</p>
+        <p>📞 Phone: +91 9876543210</p>
+        <p>📍 Address: Hyderabad, Telangana</p>
+      </div>
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>© 2026 Lavanya's Restaurant | All Rights Reserved.</p>
+      </footer>
     </div>
   );
 }

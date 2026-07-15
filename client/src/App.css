@@ -1,4 +1,4 @@
-
+/* General */
 
 body {
   margin: 0;
@@ -18,7 +18,6 @@ body {
 
 .logo {
   margin: 0;
-  font-size: 32px;
 }
 
 .nav-links {
@@ -80,9 +79,9 @@ body {
 }
 
 .menu h2 {
-  font-size: 42px;
   color: #d35400;
-  margin-bottom: 50px;
+  font-size: 42px;
+  margin-bottom: 40px;
 }
 
 .menu-items {
@@ -94,21 +93,20 @@ body {
 
 .card {
   width: 220px;
-  background: white;
-  border: 1px solid #ddd;
+  padding: 20px;
   border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 .card h3 {
   color: #d35400;
-  font-size: 26px;
 }
 
 .card p {
-  font-size: 22px;
+  width: auto;
   color: gray;
+  font-size: 20px;
 }
 
 /* About Section */
@@ -119,9 +117,8 @@ body {
 }
 
 .about h2 {
-  font-size: 42px;
   color: #d35400;
-  margin-bottom: 20px;
+  font-size: 42px;
 }
 
 .about p {
@@ -130,4 +127,32 @@ body {
   font-size: 20px;
   color: gray;
   line-height: 1.8;
+}
+
+/* Contact Section */
+
+.contact {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #f8f8f8;
+}
+
+.contact h2 {
+  color: #d35400;
+  font-size: 42px;
+}
+
+.contact p {
+  color: gray;
+  font-size: 20px;
+}
+
+/* Footer */
+
+.footer {
+  background-color: #d35400;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
 }
