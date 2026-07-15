@@ -3,6 +3,7 @@ import "./App.css";
 function App() {
   return (
     <div>
+      {/* Navbar */}
       <nav className="navbar">
         <h2 className="logo">🍽️ Lavanya's Restaurant</h2>
 
@@ -14,6 +15,7 @@ function App() {
         </ul>
       </nav>
 
+      {/* Hero Section */}
       <div className="container">
         <h1>Delicious Food, Happy Moments!</h1>
 
@@ -25,8 +27,7 @@ function App() {
         <button className="btn">Explore Menu</button>
       </div>
 
-      {/* 👇 Paste the menu section HERE */}
-
+      {/* Menu Section */}
       <div className="menu">
         <h2>Our Special Menu</h2>
 
@@ -53,6 +54,17 @@ function App() {
           </div>
 
         </div>
+      </div>
+
+      {/* About Section */}
+      <div className="about">
+        <h2>About Us</h2>
+
+        <p>
+          Welcome to Lavanya's Restaurant! We serve delicious and fresh food
+          prepared with high-quality ingredients. Our mission is to provide
+          tasty meals, excellent service, and unforgettable dining experiences.
+        </p>
       </div>
 
     </div>
