@@ -83,6 +83,47 @@ function App() {
         <p>Sunday</p>
         <p>10:00 AM - 9:00 PM</p>
       </div>
+      {/* Table Reservation Section */}
+
+<div className="reservation">
+  <h2>Table Reservation</h2>
+
+  <form className="reservation-form">
+
+    <input
+      type="text"
+      placeholder="Enter Your Name"
+    />
+
+    <input
+      type="email"
+      placeholder="Enter Your Email"
+    />
+
+    <input
+      type="tel"
+      placeholder="Enter Your Phone Number"
+    />
+
+    <input
+      type="number"
+      placeholder="Number of Guests"
+    />
+
+    <input
+      type="date"
+    />
+
+    <input
+      type="time"
+    />
+
+    <button type="submit" className="btn">
+      Reserve Table
+    </button>
+
+  </form>
+</div>
 
       {/* Contact Section */}
       <div className="contact">

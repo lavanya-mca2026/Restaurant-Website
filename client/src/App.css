@@ -350,3 +350,35 @@ body {
   transform: translateY(-10px);
   box-shadow: 0 0 20px gray;
 }
+/* Table Reservation Section */
+
+.reservation {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.reservation h2 {
+  color: #d35400;
+  font-size: 42px;
+  margin-bottom: 30px;
+}
+
+.reservation-form {
+  max-width: 500px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reservation-form input {
+  padding: 15px;
+  font-size: 18px;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+}
+
+.reservation-form button {
+  margin-top: 10px;
+}
