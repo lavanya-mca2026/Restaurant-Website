@@ -124,6 +124,39 @@ function App() {
 
   </form>
 </div>
+{/* Online Food Ordering */}
+
+<div className="online-order">
+  <h2>Online Food Ordering</h2>
+
+  <div className="order-card">
+    <h3>🍕 Pizza</h3>
+    <p>Price: ₹299</p>
+    <input type="number" placeholder="Quantity" />
+    <button className="btn">Order Now</button>
+  </div>
+
+  <div className="order-card">
+    <h3>🍔 Burger</h3>
+    <p>Price: ₹199</p>
+    <input type="number" placeholder="Quantity" />
+    <button className="btn">Order Now</button>
+  </div>
+
+  <div className="order-card">
+    <h3>🍝 Pasta</h3>
+    <p>Price: ₹249</p>
+    <input type="number" placeholder="Quantity" />
+    <button className="btn">Order Now</button>
+  </div>
+
+  <div className="order-card">
+    <h3>🥗 Salad</h3>
+    <p>Price: ₹149</p>
+    <input type="number" placeholder="Quantity" />
+    <button className="btn">Order Now</button>
+  </div>
+</div>
 
       {/* Contact Section */}
       <div className="contact">

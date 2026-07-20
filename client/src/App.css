@@ -382,3 +382,46 @@ body {
 .reservation-form button {
   margin-top: 10px;
 }
+/* Online Food Ordering */
+
+.online-order {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #f8f8f8;
+}
+
+.online-order h2 {
+  color: #d35400;
+  font-size: 42px;
+  margin-bottom: 40px;
+}
+
+.order-card {
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px lightgray;
+}
+
+.order-card h3 {
+  color: #d35400;
+}
+
+.order-card p {
+  color: gray;
+  font-size: 18px;
+}
+
+.order-card input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.order-card .btn {
+  margin-top: 10px;
+}
