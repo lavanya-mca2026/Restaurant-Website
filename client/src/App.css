@@ -425,3 +425,68 @@ body {
 .order-card .btn {
   margin-top: 10px;
 }
+/* Order History Section */
+
+.order-history {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.history-card {
+  width: 320px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 0 10px lightgray;
+  transition: 0.3s;
+}
+
+.history-card:hover {
+  transform: translateY(-10px);
+}
+
+.history-card p {
+  color: gray;
+  font-size: 18px;
+}
+
+
+/* Customer Login Section */
+
+.login {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.login input {
+  display: block;
+  width: 300px;
+  margin: 15px auto;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.login button {
+  margin-top: 15px;
+}
+
+
+/* Customer Registration Section */
+
+.register {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.register input {
+  display: block;
+  width: 300px;
+  margin: 15px auto;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.register button {
+  margin-top: 15px;
+}
