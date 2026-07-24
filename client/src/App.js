@@ -35,19 +35,23 @@ function App() {
       {/* Menu Section */}
       <div className="menu">
         <h2>Our Special Menu</h2>
+
         <div className="menu-items">
           <div className="card">
             <h3>🍕 Pizza</h3>
             <p>₹299</p>
           </div>
+
           <div className="card">
             <h3>🍔 Burger</h3>
             <p>₹199</p>
           </div>
+
           <div className="card">
             <h3>🍝 Pasta</h3>
             <p>₹249</p>
           </div>
+
           <div className="card">
             <h3>🥗 Salad</h3>
             <p>₹149</p>
@@ -68,174 +72,189 @@ function App() {
       {/* Timings Section */}
       <div className="timings">
         <h2>Restaurant Timings</h2>
+
         <p>Monday - Friday</p>
         <p>9:00 AM - 10:00 PM</p>
+
         <p>Saturday</p>
         <p>10:00 AM - 11:00 PM</p>
+
         <p>Sunday</p>
         <p>10:00 AM - 9:00 PM</p>
       </div>
+
       {/* Table Reservation Section */}
+      <div className="reservation">
+        <h2>Table Reservation</h2>
 
-<div className="reservation">
-  <h2>Table Reservation</h2>
+        <form className="reservation-form">
+          <input
+            type="text"
+            placeholder="Enter Your Name"
+          />
 
-  <form className="reservation-form">
+          <input
+            type="email"
+            placeholder="Enter Your Email"
+          />
+
+          <input
+            type="tel"
+            placeholder="Enter Your Phone Number"
+          />
+
+          <input
+            type="number"
+            placeholder="Number of Guests"
+          />
+
+          <input type="date" />
+
+          <input type="time" />
+
+          <button type="submit" className="btn">
+            Reserve Table
+          </button>
+        </form>
+      </div>
+
+      {/* Online Food Ordering */}
+      <div className="online-order">
+        <h2>Online Food Ordering</h2>
+
+        <div className="order-card">
+          <h3>🍕 Pizza</h3>
+          <p>Price: ₹299</p>
+          <input type="number" placeholder="Quantity" />
+          <button className="btn">Order Now</button>
+        </div>
+
+        <div className="order-card">
+          <h3>🍔 Burger</h3>
+          <p>Price: ₹199</p>
+          <input type="number" placeholder="Quantity" />
+          <button className="btn">Order Now</button>
+        </div>
+
+        <div className="order-card">
+          <h3>🍝 Pasta</h3>
+          <p>Price: ₹249</p>
+          <input type="number" placeholder="Quantity" />
+          <button className="btn">Order Now</button>
+        </div>
+
+        <div className="order-card">
+          <h3>🥗 Salad</h3>
+          <p>Price: ₹149</p>
+          <input type="number" placeholder="Quantity" />
+          <button className="btn">Order Now</button>
+        </div>
+      </div>
+
+      {/* Order History */}
+      <div className="order-history">
+        <h2>Order History</h2>
+
+        <div className="history-card">
+          <h3>🍕 Pizza</h3>
+          <p>Quantity: 2</p>
+          <p>Total: ₹598</p>
+          <p>Status: Delivered</p>
+        </div>
+
+        <div className="history-card">
+          <h3>🍔 Burger</h3>
+          <p>Quantity: 1</p>
+          <p>Total: ₹199</p>
+          <p>Status: Preparing</p>
+        </div>
+
+        <div className="history-card">
+          <h3>🍝 Pasta</h3>
+          <p>Quantity: 3</p>
+          <p>Total: ₹747</p>
+          <p>Status: Delivered</p>
+        </div>
+      </div>
+
+      {/* Customer Login */}
+      <div className="login">
+        <h2>Customer Login</h2>
+
+        <form className="login-form">
+          <input
+            type="email"
+            placeholder="Enter Your Email"
+          />
+
+          <input
+            type="password"
+            placeholder="Enter Your Password"
+          />
+
+          <button type="submit" className="btn">
+            Login
+          </button>
+        </form>
+      </div>
+
+      {/* Customer Registration */}
+      <div className="register">
+        <h2>Customer Registration</h2>
+
+        <form className="register-form">
+          <input
+            type="text"
+            placeholder="Enter Your Name"
+          />
+
+          <input
+            type="email"
+            placeholder="Enter Your Email"
+          />
+
+          <input
+            type="tel"
+            placeholder="Enter Your Phone Number"
+          />
+
+          <input
+            type="password"
+            placeholder="Create Password"
+          />
+
+          <input
+            type="password"
+            placeholder="Confirm Password"
+          />
+
+          <button type="submit" className="btn">
+            Register
+          </button>
+        </form>
+      </div>
+      {/* Admin Login Section */}
+
+<div className="admin-login">
+  <h2>Admin Login</h2>
+
+  <form className="admin-login-form">
 
     <input
       type="text"
-      placeholder="Enter Your Name"
-    />
-
-    <input
-      type="email"
-      placeholder="Enter Your Email"
-    />
-
-    <input
-      type="tel"
-      placeholder="Enter Your Phone Number"
-    />
-
-    <input
-      type="number"
-      placeholder="Number of Guests"
-    />
-
-    <input
-      type="date"
-    />
-
-    <input
-      type="time"
-    />
-
-    <button type="submit" className="btn">
-      Reserve Table
-    </button>
-
-  </form>
-</div>
-{/* Online Food Ordering */}
-
-<div className="online-order">
-  <h2>Online Food Ordering</h2>
-
-  <div className="order-card">
-    <h3>🍕 Pizza</h3>
-    <p>Price: ₹299</p>
-    <input type="number" placeholder="Quantity" />
-    <button className="btn">Order Now</button>
-  </div>
-
-  <div className="order-card">
-    <h3>🍔 Burger</h3>
-    <p>Price: ₹199</p>
-    <input type="number" placeholder="Quantity" />
-    <button className="btn">Order Now</button>
-  </div>
-
-  <div className="order-card">
-    <h3>🍝 Pasta</h3>
-    <p>Price: ₹249</p>
-    <input type="number" placeholder="Quantity" />
-    <button className="btn">Order Now</button>
-  </div>
-
-  <div className="order-card">
-    <h3>🥗 Salad</h3>
-    <p>Price: ₹149</p>
-    <input type="number" placeholder="Quantity" />
-    <button className="btn">Order Now</button>
-  </div>
-</div>
-{/* Order History Section */}
-
-<div className="order-history">
-  <h2>Order History</h2>
-
-  <div className="history-card">
-    <h3>🍕 Pizza</h3>
-    <p>Quantity : 2</p>
-    <p>Total : ₹598</p>
-    <p>Status : Delivered</p>
-  </div>
-
-  <div className="history-card">
-    <h3>🍔 Burger</h3>
-    <p>Quantity : 1</p>
-    <p>Total : ₹199</p>
-    <p>Status : Preparing</p>
-  </div>
-
-  <div className="history-card">
-    <h3>🍝 Pasta</h3>
-    <p>Quantity : 3</p>
-    <p>Total : ₹747</p>
-    <p>Status : Delivered</p>
-  </div>
-</div>
-
-
-{/* Customer Login Section */}
-
-<div className="login">
-  <h2>Customer Login</h2>
-
-  <form className="login-form">
-
-    <input
-      type="email"
-      placeholder="Enter Your Email"
+      placeholder="Enter Admin Username"
     />
 
     <input
       type="password"
-      placeholder="Enter Your Password"
+      placeholder="Enter Admin Password"
     />
 
-    <button className="btn">
+    <button
+      type="submit"
+      className="btn"
+    >
       Login
-    </button>
-
-  </form>
-</div>
-
-
-{/* Customer Registration Section */}
-
-<div className="register">
-  <h2>Customer Registration</h2>
-
-  <form className="register-form">
-
-    <input
-      type="text"
-      placeholder="Enter Your Name"
-    />
-
-    <input
-      type="email"
-      placeholder="Enter Your Email"
-    />
-
-    <input
-      type="tel"
-      placeholder="Enter Your Phone Number"
-    />
-
-    <input
-      type="password"
-      placeholder="Create Password"
-    />
-
-    <input
-      type="password"
-      placeholder="Confirm Password"
-    />
-
-    <button className="btn">
-      Register
     </button>
 
   </form>

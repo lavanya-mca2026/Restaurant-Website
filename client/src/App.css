@@ -490,3 +490,33 @@ body {
 .register button {
   margin-top: 15px;
 }
+/* Admin Login */
+
+.admin-login {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.admin-login h2 {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-login-form input {
+  width: 320px;
+  padding: 12px;
+  margin: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.admin-login-form button {
+  margin-top: 15px;
+}
