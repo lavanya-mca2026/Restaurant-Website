@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import ManageMenu from "./ManageMenu";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -260,8 +261,13 @@ function App() {
   </form>
 </div>
 
-      {/* Contact Section */}
-      <div className="contact">
+<ManageMenu />
+
+{/* Contact Section */}
+<div className="contact">
+
+
+      
         <h2>Contact Us</h2>
         <p>📧 Email: lavanyarestaurant@gmail.com</p>
         <p>📞 Phone: +91 9876543210</p>
