@@ -4,6 +4,7 @@ import ManageMenu from "./ManageMenu";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [search, setSearch] = useState("");
 
   return (
     <div className={darkMode ? "dark-mode" : "light-mode"}>
@@ -32,33 +33,90 @@ function App() {
         </p>
         <button className="btn">Explore Menu</button>
       </div>
+      <div className="search-section">
+  <input
+    type="text"
+    placeholder="Search Food..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
+</div>
 
+      
       {/* Menu Section */}
-      <div className="menu">
-        <h2>Our Special Menu</h2>
+     
+     {/* Menu Section */}
+<div className="menu">
+  <h2>Our Special Menu</h2>
 
-        <div className="menu-items">
-          <div className="card">
-            <h3>🍕 Pizza</h3>
-            <p>₹299</p>
-          </div>
+  <div className="menu-items">
 
-          <div className="card">
-            <h3>🍔 Burger</h3>
-            <p>₹199</p>
-          </div>
+    <div className="card">
+      <img
+        src="https://images.unsplash.com/photo-1513104890138-7c749659a591"
+        alt="Pizza"
+      />
+      <h3>🍕 Pizza</h3>
+      <p>₹299</p>
+    </div>
 
-          <div className="card">
-            <h3>🍝 Pasta</h3>
-            <p>₹249</p>
-          </div>
+    <div className="card">
+      <img
+        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+        alt="Burger"
+      />
+      <h3>🍔 Burger</h3>
+      <p>₹199</p>
+    </div>
 
-          <div className="card">
-            <h3>🥗 Salad</h3>
-            <p>₹149</p>
-          </div>
-        </div>
-      </div>
+    <div className="card">
+      <img
+        src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9"
+        alt="Pasta"
+      />
+      <h3>🍝 Pasta</h3>
+      <p>₹249</p>
+    </div>
+
+    <div className="card">
+      <img
+        src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
+        alt="Salad"
+      />
+      <h3>🥗 Salad</h3>
+      <p>₹149</p>
+    </div>
+
+  </div>
+</div>
+
+{/*Customer Reviews Section */}
+     
+      <section className="reviews">
+  <h2>Customer Reviews</h2>
+
+  <div className="review-container">
+
+    <div className="review-card">
+      <h3>⭐⭐⭐⭐⭐</h3>
+      <p>"Best Biryani in town!"</p>
+      <h4>- Sravan </h4>
+    </div>
+
+    <div className="review-card">
+      <h3>⭐⭐⭐⭐⭐</h3>
+      <p>"Fast delivery and delicious food."</p>
+      <h4>- Lavanya</h4>
+    </div>
+
+    <div className="review-card">
+      <h3>⭐⭐⭐⭐</h3>
+      <p>"Great ambience and friendly staff."</p>
+      <h4>- Ganesh</h4>
+    </div>
+
+  </div>
+</section>
 
       {/* About Section */}
       <div className="about">
@@ -69,6 +127,19 @@ function App() {
           tasty meals, excellent service, and unforgettable dining experiences.
         </p>
       </div>
+      <div className="chef">
+  <h2>Our Master Chef</h2>
+
+  <img
+    src="https://images.unsplash.com/photo-1583394293214-28ded15ee548"
+    alt="Chef"
+  />
+
+  <p>
+    Our experienced chef prepares every dish with fresh ingredients,
+    passion, and authentic flavors to give you the best dining experience.
+  </p>
+</div>
 
       {/* Timings Section */}
       <div className="timings">
