@@ -5,6 +5,39 @@ import ManageMenu from "./ManageMenu";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [search, setSearch] = useState("");
+  const [cart, setCart] = useState([]);
+
+  
+
+const foods = [
+  {
+    name: "Pizza",
+    price: 299,
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591"
+  },
+  {
+    name: "Burger",
+    price: 199,
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+  },
+  {
+    name: "Pasta",
+    price: 249,
+    image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9"
+  },
+  {
+    name: "Salad",
+    price: 149,
+    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
+  }
+];
+
+const filteredFoods = foods.filter((food) =>
+  food.name.toLowerCase().includes(search.toLowerCase())
+);
+const addToCart = (food) => {
+  setCart([...cart, food]);
+};
 
   return (
     <div className={darkMode ? "dark-mode" : "light-mode"}>
@@ -13,11 +46,13 @@ function App() {
         <h2 className="logo">🍽️ Lavanya's Restaurant</h2>
 
         <ul className="nav-links">
+          
           <li>Home</li>
           <li>About</li>
           <li>Menu</li>
           <li>Contact</li>
         </ul>
+        <h3>🛒 Cart ({cart.length})</h3>
 
         <button className="btn" onClick={() => setDarkMode(!darkMode)}>
           {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
@@ -41,55 +76,51 @@ function App() {
     onChange={(e) => setSearch(e.target.value)}
   />
 </div>
-
-      
-      {/* Menu Section */}
-     
-     {/* Menu Section */}
+{/* Menu Section */}
 <div className="menu">
   <h2>Our Special Menu</h2>
 
   <div className="menu-items">
+    {filteredFoods.length > 0 ? (
+      filteredFoods.map((food, index) => (
+        <div className="card" key={index}>
+          <img
+            src={food.image}
+            alt={food.name}
+          />
 
-    <div className="card">
-      <img
-        src="https://images.unsplash.com/photo-1513104890138-7c749659a591"
-        alt="Pizza"
-      />
-      <h3>🍕 Pizza</h3>
-      <p>₹299</p>
-    </div>
+          <h3>{food.name}</h3>
 
-    <div className="card">
-      <img
-        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
-        alt="Burger"
-      />
-      <h3>🍔 Burger</h3>
-      <p>₹199</p>
-    </div>
+          <p>₹{food.price}</p>
 
-    <div className="card">
-      <img
-        src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9"
-        alt="Pasta"
-      />
-      <h3>🍝 Pasta</h3>
-      <p>₹249</p>
-    </div>
-
-    <div className="card">
-      <img
-        src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
-        alt="Salad"
-      />
-      <h3>🥗 Salad</h3>
-      <p>₹149</p>
-    </div>
-
+          <button
+            className="btn"
+            onClick={() => addToCart(food)}
+          >
+            Order Now
+          </button>
+        </div>
+      ))
+    ) : (
+      <h3>No Food Found</h3>
+    )}
   </div>
 </div>
+{/* Shopping Cart */}
+<div className="cart-section">
+  <h2>🛒 Shopping Cart</h2>
 
+  {cart.length === 0 ? (
+    <p>Your cart is empty.</p>
+  ) : (
+    cart.map((item, index) => (
+      <div key={index} className="cart-item">
+        <p>{item.name}</p>
+        <p>₹{item.price}</p>
+      </div>
+    ))
+  )}
+</div>
 {/*Customer Reviews Section */}
      
       <section className="reviews">
