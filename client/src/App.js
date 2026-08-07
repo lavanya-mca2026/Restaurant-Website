@@ -1,6 +1,9 @@
+/* eslint-disable */
 import { useState, useEffect } from "react";
 import "./App.css";
 import ManageMenu from "./ManageMenu";
+
+const API_URL = "https://restaurant-website-oddh.onrender.com";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -31,7 +34,7 @@ function App() {
   const [currentTime, setCurrentTime] = useState(Date.now());
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/menu").then(r=>r.json()).then(d=>{if(d.length>0) setMenu(d)}).catch(()=>{});
+    fetch(`${API_URL}/api/menu`).then(r=>r.json()).then(d=>{if(Array.isArray(d) && d.length>0) setMenu(d)}).catch(()=>{});
     const savedOrders = localStorage.getItem("orders");
     if(savedOrders) setOrders(JSON.parse(savedOrders));
     const savedUser = localStorage.getItem("user");
@@ -94,7 +97,7 @@ function App() {
   const handleReserve = async (e) => {
     e.preventDefault();
     try{
-      const res = await fetch("http://localhost:5000/api/reserve", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(reservation) });
+      const res = await fetch(`${API_URL}/api/reserve`, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(reservation) });
       const data = await res.json(); alert(data.message);
     } catch { alert("Reservation saved locally!"); }
     setReservation({ name: "", email: "", phone: "", guests: 1, date: "", time: "" });
@@ -102,7 +105,7 @@ function App() {
 
   const handleEnquiry = async (e) => {
     e.preventDefault();
-    try{ await fetch("http://localhost:5000/api/enquiry", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(enquiry) }); }catch{}
+    try{ await fetch(`${API_URL}/api/enquiry`, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(enquiry) }); }catch{}
     alert("Enquiry sent!"); setEnquiry({ name: "", email: "", message: "" });
   };
 
@@ -112,7 +115,7 @@ function App() {
     const now = new Date();
     const deliveryTime = new Date(now.getTime() + 30*60000);
     const orderData = { id: Date.now(), items: cart, total: finalPrice, actualTotal: totalPrice, discount: discount, paymentMethod: paymentMethod, promoCode: promoCode, date: now.toLocaleString(), orderTime: now.getTime(), deliveryTime: deliveryTime.getTime(), user: user.email, status: "Confirmed" };
-    try{ await fetch("http://localhost:5000/api/orders", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(orderData) }); }catch{}
+    try{ await fetch(`${API_URL}/api/orders`, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(orderData) }); }catch{}
     setOrders([...orders, orderData]);
     setCart([]); setDiscount(0); setPromoCode("");
     alert(`Order Placed! Paid Rs ${finalPrice} via ${paymentMethod}. Delivery in 30 mins`);
@@ -138,25 +141,25 @@ function App() {
           <li onClick={()=>scrollTo("home")}>Home</li>
           <li onClick={()=>scrollTo("menu")}>Menu</li>
           <li onClick={()=>scrollTo("cart")}>Cart ({cart.length})</li>
-          <li onClick={()=>setShowFavOnly(!showFavOnly)}>❤️ Fav ({favorites.length})</li>
+          <li onClick={()=>setShowFavOnly(!showFavOnly)}>❤ Fav ({favorites.length})</li>
           <li onClick={()=>scrollTo("orders")}>Orders</li>
           <li onClick={()=>scrollTo("contact")}>Contact</li>
           <li onClick={()=>setShowAdmin(!showAdmin)}>{showAdmin? "Home" : "Admin"}</li>
-          <li onClick={()=>setDarkMode(!darkMode)}>{darkMode? "☀️ Light" : "🌙 Dark"}</li>
+          <li onClick={()=>setDarkMode(!darkMode)}>{darkMode? "☀ Light" : "🌙 Dark"}</li>
           {user? <li onClick={handleLogout}>Hi {user.name}</li> : <li onClick={()=>setShowLogin(true)}>Login</li>}
         </ul>
       </nav>
 
       {showLogin && (
         <div style={{position:"fixed",top:0,left:0,width:"100%",height:"100%",background:"rgba(0,0,0,0.7)",display:"flex",justifyContent:"center",alignItems:"center",zIndex:999}}>
-          <form onSubmit={handleAuth} style={{background:"white",padding:"30px",borderRadius:"15px",width:"320px", boxShadow:"0 10px 30px rgba(0,0,0,0.3)"}}>
+          <form onSubmit={handleAuth} style={{background:"white",padding:"30px",borderRadius:"15px",width:"320px"}}>
             <h3 style={{color:"#D4AF37"}}>{authMode==="login"? "Customer Login" : "Register"}</h3>
-            {authMode==="register" && <input required placeholder="Name" value={authForm.name} onChange={e=>setAuthForm({...authForm, name:e.target.value})} style={{width:"100%",margin:"8px 0",padding:"12px", borderRadius:"8px", border:"1px solid #ddd"}}/>}
-            <input required type="email" placeholder="Email" value={authForm.email} onChange={e=>setAuthForm({...authForm, email:e.target.value})} style={{width:"100%",margin:"8px 0",padding:"12px", borderRadius:"8px", border:"1px solid #ddd"}}/>
-            <input required type="password" placeholder="Password" value={authForm.password} onChange={e=>setAuthForm({...authForm, password:e.target.value})} style={{width:"100%",margin:"8px 0",padding:"12px", borderRadius:"8px", border:"1px solid #ddd"}}/>
+            {authMode==="register" && <input required placeholder="Name" value={authForm.name} onChange={e=>setAuthForm({...authForm, name:e.target.value})} style={{width:"100%",margin:"8px 0",padding:"12px"}}/>}
+            <input required type="email" placeholder="Email" value={authForm.email} onChange={e=>setAuthForm({...authForm, email:e.target.value})} style={{width:"100%",margin:"8px 0",padding:"12px"}}/>
+            <input required type="password" placeholder="Password" value={authForm.password} onChange={e=>setAuthForm({...authForm, password:e.target.value})} style={{width:"100%",margin:"8px 0",padding:"12px"}}/>
             <button type="submit" className="btn" style={{width:"100%",marginTop:"10px"}}>{authMode==="login"? "Login" : "Register"}</button>
-            <p onClick={()=>setAuthMode(authMode==="login"? "register" : "login")} style={{cursor:"pointer",color:"#D4AF37",marginTop:"12px",textAlign:"center", fontWeight:"bold"}}>{authMode==="login"? "New user? Register" : "Already user? Login"}</p>
-            <button type="button" onClick={()=>setShowLogin(false)} style={{width:"100%",marginTop:"8px", padding:"10px", borderRadius:"8px", border:"none"}}>Close</button>
+            <p onClick={()=>setAuthMode(authMode==="login"? "register" : "login")} style={{cursor:"pointer",color:"#D4AF37",marginTop:"12px",textAlign:"center"}}>{authMode==="login"? "New user? Register" : "Already user? Login"}</p>
+            <button type="button" onClick={()=>setShowLogin(false)} style={{width:"100%",marginTop:"8px", padding:"10px"}}>Close</button>
           </form>
         </div>
       )}
@@ -166,25 +169,11 @@ function App() {
           <div id="home" className="container">
             <h1>Welcome to Lavanya Premium Restaurant</h1>
             <p>Authentic Taste, Premium Quality, Family Dining - Since 2020</p>
-            <p style={{marginTop:"10px"}}>⭐ 4.8 Rating | 1000+ Happy Customers | 8 Bonus Features</p>
             <button className="btn" onClick={()=>scrollTo("menu")}>Explore Premium Menu</button>
           </div>
 
-          <div id="about" className="about-section" style={{padding:"60px 20px",textAlign:"center"}}>
-            <h2 style={{color:"#D4AF37"}}>About Lavanya Kitchen</h2>
-            <p style={{maxWidth:"700px",margin:"20px auto", lineHeight:"1.6"}}>Welcome to Lavanya Kitchen, where tradition meets taste. Since 2020, we serve authentic dishes with premium quality. Our chefs use secret recipes passed down generations. We offer luxury dining experience with gold-class hospitality.</p>
-            <p><b>Timings:</b> 11 AM - 11 PM | <b>Location:</b> Hyderabad | <b>Contact:</b> +91 9876543210</p>
-          </div>
-
-          <div className="search-section">
-            <input type="text" placeholder="🔍 Search food... (Pizza, Burger, Biryani)" value={search} onChange={e=>setSearch(e.target.value)} />
-            <button onClick={()=>setShowFavOnly(!showFavOnly)} style={{marginLeft:"10px", padding:"12px 20px", borderRadius:"20px", border:"2px solid #D4AF37", background: showFavOnly? "#D4AF37" : "white", color: showFavOnly? "white" : "#D4AF37", cursor:"pointer", fontWeight:"bold"}}>
-              {showFavOnly? "Show All" : `❤️ Favorites (${favorites.length})`}
-            </button>
-          </div>
-
           <div id="menu" className="menu">
-            <h2 style={{color:"#D4AF37"}}>Our Premium Food Menu - {filteredFoods.length} Items {showFavOnly && "(Favorites Only)"}</h2>
+            <h2 style={{color:"#D4AF37"}}>Our Premium Food Menu - {filteredFoods.length} Items</h2>
             <div className="menu-items">
               {filteredFoods.map(food => (
                 <div key={food.id} className="card">
@@ -194,96 +183,76 @@ function App() {
                   <p style={{color:"#FFA500"}}>⭐ {ratings[food.id] || food.rating || 4.5} Rating</p>
                   <div style={{display:"flex", gap:"8px", justifyContent:"center", marginTop:"10px"}}>
                     <button className="btn" onClick={()=>addToCart(food)} style={{padding:"8px 16px"}}>Add to Cart</button>
-                    <button onClick={()=>toggleFavorite(food)} style={{background: favorites.find(f=>f.id===food.id)? "#ff4444" : "#eee", color: favorites.find(f=>f.id===food.id)? "white" : "#333", border:"none", padding:"8px 12px", borderRadius:"10px", cursor:"pointer", fontSize:"16px"}}>
-                      {favorites.find(f=>f.id===food.id)? "❤️" : "🤍"}
+                    <button onClick={()=>toggleFavorite(food)} style={{background: favorites.find(f=>f.id===food.id)? "#ff4444" : "#eee", color: favorites.find(f=>f.id===food.id)? "white" : "#333", border:"none", padding:"8px 12px", borderRadius:"10px", cursor:"pointer"}}>
+                      {favorites.find(f=>f.id===food.id)? "❤" : "🤍"}
                     </button>
-                  </div>
-                  <div style={{marginTop:"10px"}}>
-                    {[1,2,3,4,5].map(s=>(
-                      <span key={s} onClick={()=>rateFood(food.id, s)} style={{cursor:"pointer", fontSize:"20px", color:"#D4AF37"}}>
-                        {s <= (ratings[food.id] || 0)? "★" : "☆"}
-                      </span>
-                    ))}
                   </div>
                 </div>
               ))}
             </div>
-            {filteredFoods.length===0 && <p style={{marginTop:"30px", color:"red"}}>No food found. Try searching Pizza or Burger or check Favorites.</p>}
           </div>
 
           <div id="cart" className="cart-section">
-            <h2 style={{color:"#D4AF37"}}>🛒 Your Cart - Premium Ordering</h2>
-            {cart.length===0? <p>Cart empty - Add some delicious food!</p> : (
+            <h2 style={{color:"#D4AF37"}}>🛒 Your Cart</h2>
+            {cart.length===0? <p>Cart empty</p> : (
               <>
                 {cart.map((item, i) => <div key={i} className="cart-item"><span>{item.name} - Rs {item.price}</span><button onClick={()=>removeFromCart(i)} style={{background:"red", color:"white", border:"none", padding:"5px 10px", borderRadius:"5px", cursor:"pointer"}}>Remove</button></div>)}
                 <h3>Total: Rs {totalPrice} {discount>0 && <span style={{color:"green"}}> - Discount Rs {discount} = Rs {finalPrice}</span>}</h3>
-
                 <div style={{margin:"20px auto",maxWidth:"550px",textAlign:"left",background:"#fff9e6",padding:"20px",borderRadius:"15px", border:"2px solid #D4AF37"}}>
-                  <h3>💳 Select Payment Method - Bonus Feature 1</h3>
-                  <label style={{display:"block", margin:"8px 0"}}><input type="radio" name="pay" checked={paymentMethod==="COD"} onChange={()=>setPaymentMethod("COD")} /> Cash on Delivery (COD) - Free</label>
-                  <label style={{display:"block", margin:"8px 0"}}><input type="radio" name="pay" checked={paymentMethod==="UPI"} onChange={()=>setPaymentMethod("UPI")} /> UPI / GPay / PhonePe - Instant</label>
-                  <label style={{display:"block", margin:"8px 0"}}><input type="radio" name="pay" checked={paymentMethod==="Card"} onChange={()=>setPaymentMethod("Card")} /> Credit / Debit Card - Secure</label>
-                  <label style={{display:"block", margin:"8px 0"}}><input type="radio" name="pay" checked={paymentMethod==="NetBanking"} onChange={()=>setPaymentMethod("NetBanking")} /> Net Banking - Safe</label>
-                  <hr style={{margin:"15px 0"}}/>
-                  <h4>🎁 Promo Codes & Offers - Bonus Feature 2</h4>
+                  <h3>💳 Payment Method</h3>
+                  <label style={{display:"block", margin:"8px 0"}}><input type="radio" name="pay" checked={paymentMethod==="COD"} onChange={()=>setPaymentMethod("COD")} /> Cash on Delivery</label>
+                  <label style={{display:"block", margin:"8px 0"}}><input type="radio" name="pay" checked={paymentMethod==="UPI"} onChange={()=>setPaymentMethod("UPI")} /> UPI / GPay</label>
+                  <label style={{display:"block", margin:"8px 0"}}><input type="radio" name="pay" checked={paymentMethod==="Card"} onChange={()=>setPaymentMethod("Card")} /> Card</label>
+                  <h4>🎁 Promo Codes</h4>
                   <div style={{display:"flex", gap:"10px", marginTop:"10px"}}>
                     <input placeholder="Enter LAVANYA10" value={promoCode} onChange={e=>setPromoCode(e.target.value)} style={{padding:"10px",flex:1, borderRadius:"8px", border:"1px solid #D4AF37"}} />
-                    <button onClick={applyPromo} style={{padding:"10px 20px", background:"#D4AF37", color:"white", border:"none", borderRadius:"8px", cursor:"pointer", fontWeight:"bold"}}>Apply</button>
+                    <button onClick={applyPromo} style={{padding:"10px 20px", background:"#D4AF37", color:"white", border:"none", borderRadius:"8px", cursor:"pointer"}}>Apply</button>
                   </div>
-                  <p style={{color:"green",fontSize:"12px", marginTop:"8px"}}>Valid: LAVANYA10 (10% OFF), WELCOME20 (20% OFF) - Min order Rs 200</p>
-                  {paymentMethod!=="COD" && <div style={{marginTop:"15px", padding:"10px", background:"white", borderRadius:"8px"}}><h4>🔒 Secure Payment - Razorpay Integrated (Demo)</h4><input placeholder="Card/UPI Number (Mock) - 1234 5678 9012" style={{padding:"8px",width:"100%", marginTop:"8px", borderRadius:"6px", border:"1px solid #ddd"}} /><p style={{fontSize:"11px", color:"green"}}>🔒 100% Secure & Encrypted</p></div>}
                 </div>
-
                 <button className="btn" onClick={handlePlaceOrder} style={{fontSize:"18px", padding:"15px 35px"}}>Pay Rs {finalPrice} via {paymentMethod} & Place Order 🚀</button>
               </>
             )}
           </div>
 
           <div id="orders" className="cart-section">
-            <h2 style={{color:"#D4AF37"}}>📦 Order History - Live Tracking (Bonus 3)</h2>
-            {orders.length===0? <p>No orders yet. Order some tasty food!</p> : orders.map(o=>{
+            <h2 style={{color:"#D4AF37"}}>📦 Order History</h2>
+            {orders.length===0? <p>No orders yet.</p> : orders.map(o=>{
               const statusInfo = getOrderStatus(o);
               return(
                 <div key={o.id} className="history-card" style={{borderLeft:`6px solid ${statusInfo.color}`}}>
-                  <b>Order #{o.id}</b> - {o.date} - <b>Rs {o.total}</b> {o.paymentMethod && `(Paid via ${o.paymentMethod})`} {o.discount>0 && <span style={{color:"green"}}>[Saved Rs {o.discount}]</span>}<br/>
+                  <b>Order #{o.id}</b> - {o.date} - <b>Rs {o.total}</b><br/>
                   <span>Items: {o.items.map(i=>i.name).join(" | ")}</span><br/>
-                  <b style={{color: statusInfo.color, fontSize:"16px"}}>Status: {statusInfo.text}</b><br/>
-                  <b>⏳ Time Left: {statusInfo.timeLeft}</b><br/>
-                  <button onClick={()=>window.print()} style={{marginTop:"8px", background:"#D4AF37", color:"white", border:"none", padding:"6px 12px", borderRadius:"6px", cursor:"pointer"}}>🧾 Print Bill</button>
+                  <b style={{color: statusInfo.color}}>Status: {statusInfo.text} - {statusInfo.timeLeft}</b>
                 </div>
               );
             })}
           </div>
 
           <div id="reserve" className="reservation">
-            <h2 style={{color:"#D4AF37"}}>📅 Reserve a Table - Premium Dining</h2>
-            <p>Book your luxury table in advance - Free Reservation!</p>
+            <h2 style={{color:"#D4AF37"}}>📅 Reserve a Table</h2>
             <form onSubmit={handleReserve} style={{marginTop:"20px"}}>
               <input required placeholder="Full Name" value={reservation.name} onChange={e=>setReservation({...reservation, name:e.target.value})} />
-              <input required placeholder="Email Address" type="email" value={reservation.email} onChange={e=>setReservation({...reservation, email:e.target.value})} />
-              <input required placeholder="Phone Number" value={reservation.phone} onChange={e=>setReservation({...reservation, phone:e.target.value})} />
-              <input required type="number" min="1" max="20" placeholder="No. of Guests" value={reservation.guests} onChange={e=>setReservation({...reservation, guests:e.target.value})} />
+              <input required placeholder="Email" type="email" value={reservation.email} onChange={e=>setReservation({...reservation, email:e.target.value})} />
+              <input required placeholder="Phone" value={reservation.phone} onChange={e=>setReservation({...reservation, phone:e.target.value})} />
+              <input required type="number" min="1" max="20" placeholder="Guests" value={reservation.guests} onChange={e=>setReservation({...reservation, guests:e.target.value})} />
               <input required type="date" value={reservation.date} onChange={e=>setReservation({...reservation, date:e.target.value})} />
               <input required type="time" value={reservation.time} onChange={e=>setReservation({...reservation, time:e.target.value})} />
-              <button type="submit" className="btn" style={{width:"80%", maxWidth:"400px"}}>Reserve Table - Free 🥂</button>
+              <button type="submit" className="btn">Reserve Table 🥂</button>
             </form>
           </div>
 
           <div id="contact" className="reservation">
-            <h2 style={{color:"#D4AF37"}}>💬 Contact Us - Customer Support</h2>
-            <p>Have questions? Send us a message - We reply in 5 minutes!</p>
+            <h2 style={{color:"#D4AF37"}}>💬 Contact Us</h2>
             <form onSubmit={handleEnquiry} style={{marginTop:"20px"}}>
               <input required placeholder="Your Name" value={enquiry.name} onChange={e=>setEnquiry({...enquiry, name:e.target.value})} />
               <input required type="email" placeholder="Your Email" value={enquiry.email} onChange={e=>setEnquiry({...enquiry, email:e.target.value})} />
-              <textarea required placeholder="Your Message - Feedback, Complaint, Query" value={enquiry.message} onChange={e=>setEnquiry({...enquiry, message:e.target.value})} style={{width:"80%",height:"100px",margin:"10px",padding:"12px", borderRadius:"10px", border:"1px solid #ddd", maxWidth:"400px"}}></textarea>
-              <button type="submit" className="btn" style={{width:"80%", maxWidth:"400px"}}>Send Message 📨</button>
+              <textarea required placeholder="Your Message" value={enquiry.message} onChange={e=>setEnquiry({...enquiry, message:e.target.value})} style={{width:"80%",height:"100px",margin:"10px",padding:"12px"}}></textarea>
+              <button type="submit" className="btn">Send Message 📨</button>
             </form>
-            <p style={{marginTop:"20px"}}><b>📍 Address:</b> Lavanya Kitchen, Road No. 10, Banjara Hills, Hyderabad - 500034<br/><b>📞 Phone:</b> +91 9876543210 | <b>✉️ Email:</b> contact@lavanyakitchen.com</p>
           </div>
 
           <footer className="footer">
-            <p>© 2026 Lavanya Kitchen 👑 | Project 7 - Premium Restaurant Website</p>
-            <p style={{fontSize:"12px", marginTop:"5px"}}>8 Bonus Features: Payment | Promo Codes | Live Timer | Login | Dark Mode | Favorites | Ratings | Admin Delete + Bill Print | Made with ❤️</p>
+            <p>© 2026 Lavanya Kitchen 👑</p>
           </footer>
         </>
       )}

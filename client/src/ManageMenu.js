@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+const API_URL = "https://restaurant-website-oddh.onrender.com";
+
 function ManageMenu({ getOrderStatus }) {
   const [menu, setMenu] = useState([]);
   const [newItem, setNewItem] = useState({ name: "", price: "", image: "" });
@@ -9,23 +11,26 @@ function ManageMenu({ getOrderStatus }) {
 
   const fetchAll = async () => {
     try {
-      const m = await fetch("http://localhost:5000/api/menu").then(r=>r.json());
-      const r = await fetch("http://localhost:5000/api/reservations").then(r=>r.json());
-      const e = await fetch("http://localhost:5000/api/enquiries").then(r=>r.json());
-      const o = await fetch("http://localhost:5000/api/orders").then(r=>r.json());
-      setMenu(m); setReservations(r); setEnquiries(e); setOrders(o);
+      const m = await fetch(`${API_URL}/api/menu`).then(r=>r.json());
+      const r = await fetch(`${API_URL}/api/reservations`).then(r=>r.json());
+      const e = await fetch(`${API_URL}/api/enquiries`).then(r=>r.json());
+      const o = await fetch(`${API_URL}/api/orders`).then(r=>r.json());
+      if(Array.isArray(m)) setMenu(m);
+      if(Array.isArray(r)) setReservations(r);
+      if(Array.isArray(e)) setEnquiries(e);
+      if(Array.isArray(o)) setOrders(o);
     } catch { console.log("Backend not running"); }
   };
 
   useEffect(() => {
     fetchAll();
-    const t = setInterval(fetchAll, 2000);
+    const t = setInterval(fetchAll, 3000);
     return () => clearInterval(t);
   }, []);
 
   const addItem = async () => {
     if (!newItem.name || !newItem.price) { alert("Fill name and price"); return; }
-    const res = await fetch("http://localhost:5000/api/menu", {
+    const res = await fetch(`${API_URL}/api/menu`, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newItem)
     });
@@ -37,19 +42,19 @@ function ManageMenu({ getOrderStatus }) {
 
   const deleteItem = async (id) => {
     if(!window.confirm("Delete this food item?")) return;
-    await fetch("http://localhost:5000/api/menu/" + id, { method: "DELETE" });
+    await fetch(`${API_URL}/api/menu/` + id, { method: "DELETE" });
     setMenu(menu.filter((x) => x.id !== id));
   };
   const deleteRes = async (id) => {
-    await fetch(`http://localhost:5000/api/reservations/${id}`, {method:"DELETE"});
+    await fetch(`${API_URL}/api/reservations/${id}`, {method:"DELETE"});
     setReservations(reservations.filter(r=> r.id!== id));
   };
   const deleteEnq = async (id) => {
-    await fetch(`http://localhost:5000/api/enquiries/${id}`, {method:"DELETE"});
+    await fetch(`${API_URL}/api/enquiries/${id}`, {method:"DELETE"});
     setEnquiries(enquiries.filter(e=> e.id!== id));
   };
   const deleteOrder = async (id) => {
-    await fetch(`http://localhost:5000/api/orders/${id}`, {method:"DELETE"});
+    await fetch(`${API_URL}/api/orders/${id}`, {method:"DELETE"});
     setOrders(orders.filter(o=> o.id!== id));
   };
 
